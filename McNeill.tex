@@ -1,0 +1,708 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage{biblatex}
+\iffalse
+\addbibresource{s1.bib}
+\addbibresource{s3.bib}
+\addbibresource{s4.bib}
+\addbibresource{s5.bib}
+\fi
+\addbibresource{sources.bib}
+\RequirePackage{rosshead2}
+
+
+\newcommand{\myname}{Ross McNeill}
+\newcommand{\mymail}{ross@anibla.net}
+\newcommand{\myclass}{Born and Inverse Born Series for a Special Case of the Second Harmonic Generation Problem} %Enter class name here
+%\newcommand{\lecnum}{2} % Enter lecture number here
+\newcommand{\hh}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1
+\newcommand{\hwnum}{3} %Enter class name here
+
+\ihead{} % Page header left
+\ohead{\thepage} % Page header right
+\ifoot{\myname} % left footer
+\ofoot{\mymail} % right footer
+
+\title{
+\normalfont \normalsize
+\textsc{Drexel University, Department of Mathematics} \\ [8pt] % Your university, school and/or department name(s)
+%\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge\myclass\\
+}
+\author{\myname}
+
+\begin{document}
+\maketitle
+%\tableofcontents
+%\newpage
+\abstract
+We study the Born and Inverse Born series for a special case of the second harmonic generation system of PDEs.
+We give a recursive formula for the forward operators and prove boundedness conditions that guarantee the convergence of the Born and inverse Born series.
+We also use fixed point theory to give explicit conditions for convergence of the Born series.
+
+\section{Introduction: The Forward Problem}\label{intro}
+Let $\Omega \subseteq \mathbb{R}^{d}$ with smooth boundary.
+The second harmonic generation problem is to find a unique solution to the coupled system
+%TODO change \eta_{2} to \eta for the WHOLE PAPER
+\begin{align*}
+	\begin{split}
+	\Delta u^{(1)} + k^2\left( 1 + 4\pi \eta \right) u^{(1)} &= -4\pi k^2\left( \eta_1u^{(1)} + 2\eta_2u^{(2)}\left(u^{(1)}\right)^{*} \right)\\
+	\Delta u^{(2)} + \left( 2k \right)^2\left( 1 + 4\pi \eta \right) u^{(2)} &= -4\pi\left( 2k \right)^2\left( \eta_1u^{(2)} + \eta_2\left(u^{(1)}\right)^{2} \right)
+	\end{split}
+	\qquad\text{in $\Omega$}\\
+	\dfrac{\pp{u^{(1)}}}{\pp{\nu}} &= g, \qquad \dfrac{\pp{u^{(2)}}}{\pp{\nu}}= 0 \qquad \text{on } \pp{\Omega}
+\end{align*}
+where $\eta$ is a known constant and $\nu$ is the unit outward normal vector to $\pp{\Omega}$.
+In this paper, we analyze the Born and inverse Born series and prove the existence and uniqueness of a special case of the second harmonic generation problem given by
+
+%TODO move fixed point stuff into the existence uniqueness section.
+\begin{align}\label{eq:1:1}
+	\begin{split}
+	\Delta u^{(1)} + k^2 u^{(1)} &= -4\pi k^2\left( 2\eta_2 u^{(2)}u^{(1)} \right) \\
+	\Delta u^{(2)} + \left( 2k \right)^2 u^{(2)} &= -4\pi\left( 2k \right)^2\left( \eta_2 \left(u^{(1)}\right)^2 \right)\\
+	\dfrac{\pp{u^{(1)}}}{\pp{\nu}} &= g, \qquad \dfrac{\pp{u^{(2)}}}{\pp{\nu}}= 0 \qquad \text{on } \pp{\Omega}
+	\end{split}
+\end{align}
+Since $\eta=0$ and $\eta_1= 0$, we will abuse notation and denote $\eta \coloneqq \eta_2$
+for the rest of the paper.
+
+In order to prove the existence and uniqueness of solutions to \cref{eq:1:1}, we convert the system of PDEs into a transformation between vector spaces.
+Let $G\left( k; x, y \right) $ be the Green's function for the operator $\Delta u^{(1)} + k^2$
+and
+$G\left( 2k; x, y \right) $ be the Green's function for the operator $\Delta u^{(1)} + \left( 2k \right)^2$.
+Then we can transform the system of PDEs in \cref{eq:1:1} into an operator
+\[
+	T\colon C\left( \overline{\Omega} \right)^2\to C\left( \overline{\Omega} \right)^2
+\]
+given by
+\begin{equation}\label{intro:2}
+T\begin{pmatrix} u^{(1)}\\u^{(2)} \end{pmatrix}  = \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix} +
+\begin{pmatrix}
+	-8\pi k^2 \int_{\Omega}^{} G\left(k; x,y \right) \eta\left( y \right) u^{(1)}\left( y \right) u^{(2)}\left( y \right)\dd{y}\\
+	-4 \pi \left( 2k \right) ^2\int_{\Omega}^{} G\left( 2k; x,y \right) \eta\left( y \right) \left(u^{(1)}\right)^2\left( y \right)\dd{y}
+\end{pmatrix}
+.\end{equation}
+
+Note that a fixed point $u \in C\left( \overline{\Omega} \right)^2$ satisfies the PDE \cref{eq:1:1}.
+The following rest gives conditions for the existence of such a $u$.
+
+\begin{thm}
+	Let $T: C\left( \overline{\Omega} \right)^2 \to C\left( \overline{\Omega} \right)^2$ be defined by \cref{intro:2}.
+	Define
+\begin{align*}
+	\mu_1 &\coloneqq 8\pi k^2 \sup_{x \in \Omega}\int_{\Omega}^{} \left| G\left(k; x,y \right) \right|  \dd{y}\\
+	\mu_{2}&\coloneqq 16\pi k^2 \sup_{x \in \Omega}\int_{\Omega}^{} \left| G\left(2k; x,y \right) \right|  \dd{y}
+\end{align*}
+and $\mu = \max \left\{ \mu_1,\mu_2 \right\}$.
+Then if
+\[
+\lVert \eta \rVert \le \frac{1}{4\mu \lVert u_0 \rVert}
+,\] 
+$T$ has a unique fixed point if the ball of radius $\lVert u_0 \rVert$ about $u_0 \in \left( C \overline{\Omega} \right)^2$.
+\end{thm}
+The proof is given in \Cref{sec2}
+
+\section{The Forward Born Series}
+
+We wish to compute the function $u$ on $\pp{\Omega}$ given a source $g $ on $\pp{\Omega}$.
+Our presentation follows that in \cite{DeFilippis_2023}.
+The solution to the forward problem is derived by iteration of the integral equation \cref{intro:2}. We seek a series representation of $u$ of the form
+\begin{equation}\label{born1}
+u = u_0 + K_1\left( \eta \right) + K_2\left( \eta,\eta \right) +
+K_3\left( \eta,\eta,\eta \right) +\cdots
+.\end{equation}
+The forward operators are of the form
+\[
+	K_{n}\left( \eta,\ldots,\eta \right)  \coloneqq \begin{pmatrix} K_n^{(1)}\left( \eta,\ldots,\eta \right) \\K_n^{(2)}\left( \eta,\ldots,\eta \right)  \end{pmatrix} \colon \left[ L^{\infty}\left( \Omega \right)  \right]^{n} \to C\left( \pp{\Omega}\times \pp{\Omega} \right)^2
+.\]
+Now, $K_{n}$ is $n$-linear on $\left[ L^{\infty}\left( \Omega \right) \right]^{n}$.
+The fixed point iteration gives:
+ \[
+u^{(1)}\left( x \right)\coloneqq T\left( u_0 \right)\left( x \right)
+= \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix}
+\begin{pmatrix}
+	-8\pi k^2\int_{\Omega}^{} G\left(k; x,y \right) \eta\left( y \right) u_0^{(1)}\left( y \right) u^{(2)}_0\left( y \right)\dd{y}\\
+	-4 \pi \left( 2k \right)^2\int_{\Omega}^{} G\left(2k; x,y \right) \eta\left( y \right)  u_0^{(1)}u_0^{(1)}\left( y \right)\dd{y}
+\end{pmatrix}
+\]
+which implies that
+\[
+K_1\left( \eta \right) \left( x \right)
+=\begin{pmatrix}
+	-8\pi k^2\int_{\Omega}^{} G\left(k; x,y \right) \eta\left( y \right) u_0^{(1)}\left( y \right) u^{(2)}_0\left( y \right)\dd{y}\\
+	-4 \pi\left( 2k \right)^2\int_{\Omega}^{} G\left(2k; x,y \right) \eta\left( y \right)  u_0^{(1)}u_0^{(1)}\left( y \right)\dd{y}
+\end{pmatrix}
+.\]
+To make our lives easier, define
+ \begin{align*}
+	h_1\left( \begin{pmatrix} v^{(1)}\\v^{(2)} \end{pmatrix} , \eta \right)
+	&= -8\pi k^2\int_{\Omega}^{} G\left(k; x,y \right) \eta\left( y \right) v^{(1)}\left( y \right) v^{(2)}\left( y \right)\dd{y},\\
+	h_2\left( \begin{pmatrix} v^{(1)}\\v^{(2)} \end{pmatrix} , \eta \right)
+	&= -4 \pi \left( 2k \right)^2\int_{\Omega}^{} G\left(2k; x,y \right) \eta\left( y \right) v^{(1)}\left( y \right) v^{(1)}\left( y \right)\dd{y}
+.\end{align*}
+
+%TODO define the tensor product.
+\begin{defn}
+	Let $T_{i}$ and $T_{j}$ be multilinear operators of order $i$ and $j$ respectively.
+	Define the tensor product $T_{i}\otimes T_{j}$ to be
+	\[
+	T_{i}\otimes T_{j}\left( \alpha_1,\ldots,\alpha_{i},\alpha_{i + 1}, \ldots, \alpha_{i + j} \right)
+	= T_{i}\left(\alpha_1,\ldots,\alpha_{i}\right)  T_{i}\left(\alpha_1,\ldots,\alpha_{j}\right) 
+	,\] 
+	which is of order $i + j$.
+\end{defn}
+
+\begin{defn}\label{H1H2}
+	%TODO make clear that T_{k} is a VECTOR of two multilinear operators, that is $T = T_{k}^{(1)}, T_{k}^{(2)}$
+	Let $T_{k}\left( \alpha_1,\alpha_2,\ldots,\alpha_{k} \right)$ be a multilinear operator of order $k$.
+	Define the $k + 1$ order multilinear operators $H_1T_{k}$ and $H_2T_{k}$
+	by
+	\[
+	H_1T_{k}\left( \alpha_1,\ldots,\alpha_{k + 1} \right) =
+	h_1\left( \begin{pmatrix} T_{k}^{(1)}( \alpha_1^{(1)},\ldots,\alpha_{k}^{(1)} )\\T_{k}^{(2)} ( \alpha_1^{(2)},\ldots,\alpha_{k}^{(2)} )\end{pmatrix}  ,\alpha_{k + 1} \right)
+	\]
+	and
+	\[
+	H_2T_{k}\left( \alpha_1,\ldots,\alpha_{k + 1} \right)
+	h_2\left( \begin{pmatrix} T_{k}^{(1)}( \alpha_1^{(1)},\ldots,\alpha_{k}^{(1)} )\\T_{k}^{(2)} ( \alpha_1^{(2)},\ldots,\alpha_{k}^{(2)} )\end{pmatrix}  ,\alpha_{k + 1} \right)
+	.\]
+\end{defn}
+\noindent Thus,
+\[
+	T\begin{pmatrix} v^{(1)}\\v^{(2)} \end{pmatrix} = \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix} + \begin{pmatrix} H_1 v^{(1)}\otimes v^{(2)} \\H_2 v^{(1)} \otimes v^{(1)}\end{pmatrix}
+\]
+becomes a sum of multilinear operators.
+
+\begin{lem}\label{lemma1}
+	considering the $n$th iterate as a sum of multilinear operators, we have
+	\begin{equation}\label{lem1:1}
+		\begin{pmatrix} u_{n + 1}^{(1)}\\u_{n + 1}^{(2)} \end{pmatrix} = \begin{pmatrix} u_n^{(1)}\\u_n^{(2)} \end{pmatrix} + \begin{pmatrix} \text{multilinear operators of order $\ge n + 1$}\\\text{multilinear operators of order $\ge n + 1$} \end{pmatrix}
+	.\end{equation}
+\end{lem}
+\begin{proof}
+	Proof by induction on $n$.
+	For the base case, we have
+	\[
+	\begin{pmatrix} u_{1}^{(1)}\\u_{1}^{(2)} \end{pmatrix} = \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix} +
+	\begin{pmatrix}
+		H_1 u_0^{(1)} \otimes u_0^{(2)}\\
+		H_2 u_0^{(1)} \otimes u_0^{(1)}
+\end{pmatrix}
+	.\]
+	which obviously satisfies \cref{lem1:1}.
+	For the induction step, we assume that
+\[
+		\begin{pmatrix} u_{n}^{(1)}\\u_n^{(2)} \end{pmatrix} = \begin{pmatrix} u_{n-1}^{(1)}\\u_{n-1}^{(2)} \end{pmatrix} +  \begin{pmatrix} w_1\\w_2 \end{pmatrix}
+\]
+where $w_1,w_2$ are sums of multilinear operators of order at least $n$.
+Then,
+\begin{align*}
+u_n^{(1)} \otimes u_n^{(2)}
+&=\left( u_{n-1}^{(1)} + w_1 \right) \otimes \left( u_{n-1}^{(2)}+ w_2 \right)\\
+&=u_{n-1}^{(1)} \otimes u_{n-1}^{(2)} + u_{n-1}^{(1)} \otimes w_2 + w_1\otimes u_{n-1}^{(2)} + w_1\otimes w_2 \\
+&= u_{n-1}^{(1)}\otimes u_{n-1}^{(2)} + \text{multilinear operators of order at least $n$}
+.\end{align*}
+A similar calculation gives
+\[
+u_n^{(1)} \otimes u_n^{(2)}
+= u_{n-1}^{(1)}\otimes u_{n-1}^{(1)} + \text{multilinear operators of order at least $n$}
+.\]
+Now, applying $H_1$ (resp. $H_2$) to an operator increases the order by 1 so any product containing a $w$
+
+Thus, we combine our results to obtain
+\begin{align*}
+	\begin{pmatrix} u_{n + 1}^{(1)}\\u_{n + 1}^{(2)} \end{pmatrix}
+	&= \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix} +
+\begin{pmatrix}
+		H_1 u_n^{(1)} \otimes u_n^{(2)}\\
+		H_2 u_n^{(1)} \otimes u_n^{(1)}\\
+\end{pmatrix}\\
+&= \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix} +
+\begin{pmatrix}
+		H_1 u_{n-1}^{(1)} \otimes u_{n-1}^{(2)}+ \text{multilinear operators of order at least $n$}\\
+		H_2 u_{n-1}^{(1)} \otimes u_{n-1}^{(1)}+ \text{multilinear operators of order at least $n$}\\
+\end{pmatrix}\\
+&= \begin{pmatrix} u_n^{(1)}\\u_n^{(2)} \end{pmatrix}
++ \begin{pmatrix} \text{multilinear operators of order $\ge n + 1$}\\\text{multilinear operators of order $\ge n + 1$} \end{pmatrix}
+\end{align*}
+Where the last equality holds because applying $H_1$ and $H_2$ to the operators $u_n^{(1)}\otimes u_n^{(2)}$ and $u_n^{(1)}\otimes u_n^{(1)}$ respectively, we increase the order of the operators by one.
+
+giving us \cref{lem1:1}.
+\end{proof}
+
+\Cref{lemma1} shows that the fixed point iteration that generates the sequence $\left\{ u_{n} \right\} $ also generates the series of the form \cref{born1}.
+ For each $K_{n}$, the operator $K_n^{(1)}$ and $K_{n}^{(2)}$ are sums of multilinear operators of order $n$.
+ \Cref{lemma1} also tells us that the $n$th iterate $u_{n}$ contains all terms of degree $n$.
+ From this, we obtain that
+\[
+\begin{pmatrix} u_n^{(1)}\\u_n^{(2)} \end{pmatrix}
+= \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix}
++ \sum_{i=1}^{n} \begin{pmatrix} K_i^{(1)}\left( \eta,\ldots,\eta \right)\\K_i^{(2)} \left( \eta,\ldots,\eta \right)\end{pmatrix}
++\begin{pmatrix} \text{terms of order $\ge n + 1$}\\ \text{terms of order $\ge n + 1$}\end{pmatrix}
+.\]
+\subsection{A General Formula for the Forward Operators}
+Our fixed point iteration is given by the scheme
+%TODO write out some of the forward operators expertly, maybe u_{2}
+%TODO add "in genera" before third thing here
+\begin{align*}
+	\begin{pmatrix} u_1^{(1)}\\u_1^{(2)}\end{pmatrix}  &= \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix} + \begin{pmatrix} H_1 u_0^{(1)}\otimes u_0^{(2)}\\H_2 u_0^{(1)} \otimes u_0^{(1)}\end{pmatrix} \\
+	\begin{pmatrix} u_2^{(1)}\\u_2^{(2)}\end{pmatrix}  &= \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix} + \begin{pmatrix} H_1 u_1^{(1)}\otimes u_1^{(2)}\\H_2 u_1^{(1)} \otimes u_1^{(1)}\end{pmatrix} \\
+	\begin{pmatrix} u_{n + 1}^{(1)}\\u_{n + 1}^{(2)}\end{pmatrix} &= \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix} + \begin{pmatrix} H_1 u_n^{(1)}\otimes u_n^{(2)}\\H_2 u_n^{(1)} \otimes u_n^{(1)}\end{pmatrix}
+.\end{align*}
+To compute an explicit form for the forward operators $K_{n}$, we define
+\[
+\begin{pmatrix} U_n^{(1)}\\U_n^{(2)} \end{pmatrix}
+\coloneqq\begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix}  + \sum_{i=1}^{n} \begin{pmatrix} K_i^{(1)}\left( \eta,\ldots,\eta \right)\\K_i^{(2)} \left( \eta,\ldots,\eta \right)\end{pmatrix}
+.\]
+That is, $U_{n}$ is the sum of the first $n$ forward operators. Now  \Cref{lemma1} gives
+\[
+\begin{pmatrix} u_n^{(1)}\\u_n^{(2)} \end{pmatrix} = \begin{pmatrix} U_n^{(1)}\\U_n^{(2)} \end{pmatrix}+ \begin{pmatrix} w_1\\w_2 \end{pmatrix}
+.\]
+where $w_1,w_2$ are sums of multilinear operators of order $\ge n + 1$.
+Now, we compute $U_{n + 1}$:
+\[
+\begin{pmatrix} u_{n + 1}^{(1)}\\u_{n + 1}^{(2)} \end{pmatrix}
+= \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix}+
+\begin{pmatrix} H_1 \left(U_n^{(1)} + w_1\right)\otimes \left(U_n^{(2)} + w_2\right)\\H_2 \left(U_n^{(1)} + w_1\right) \otimes \left(U_n^{(1)} + w_1\right)\end{pmatrix}
+.\]
+Similarly to \Cref{lemma1}, after expanding out the tensor product, any terms containing $w_1, w_2$ may be dropped as they will be of higher order than $n + 1$.
+Thus, all of the terms of $\begin{pmatrix} K_{n + 1}^{(1)}\\K_{n + 1}^{(2)} \end{pmatrix} $ will be contained in
+\[
+\begin{pmatrix} H_1 U_n^{(1)}\otimes U_n^{(2)}\\H_2 U_n^{(1)} \otimes U_n^{(1)}\end{pmatrix}
+.\]
+Now, $H_1$ and $H_2$ add one to the order, $K_{n + 1}^{(1)}$ will be the sum of all terms of the form
+\[
+H_1 K_i^{(1)}\otimes K_j^{(2)} \quad \text{where} \quad i + j = n
+\]
+ and
+$K_{n + 1}^{(2)}$ will be the sum of terms of the form
+\[
+H_2 K_i^{(i)}\otimes K_j^{(2)}, \quad \text{where} \quad i + j = n
+.\]
+Thus, we obtain
+ \[
+	 K_{n + 1}^{(1)}= H_1\sum_{\substack{0\le i,j\le n;\\ i + j = n}} K_i^{(1)} \otimes K_j^{(2)}
+	 \qquad \text{and} \qquad
+	 K_{n + 1}^{(2)}= H_2\sum_{\substack{0\le i,j\le n;\\ i + j = n}} K_i^{(1)} \otimes K_j^{(1)}
+\]
+and we have derived the following recurrence for the forward operators:
+%TODO add "in genera" before third thing here
+\begin{align}\label{fwop}
+	K_1 &= \begin{pmatrix} K_0^{(1)}\\K_0^{(2)} \end{pmatrix} = \begin{pmatrix} u_0^{(1)}\\u_0^{(2)}\end{pmatrix},\nonumber\\
+	K_2 &= \begin{pmatrix} K_1^{(1)}\\K_1^{(2)} \end{pmatrix} = \begin{pmatrix} H_1 u_0^{(1)}\otimes u_0^{(2)}\\H_2 u_0^{(1)} \otimes u_0^{(1)}\end{pmatrix},\nonumber\\
+	K_{n + 1} &= \begin{pmatrix} K_{n + 1}^{(1)}\\K_{n + 1}^{(2)} \end{pmatrix} = \begin{pmatrix} H_1 \sum\limits_{\substack{0\le i,j\le n\\i + j = n}} K_i^{(1)}\otimes K_j^{(2)}\\H_2 \sum\limits_{\substack{0\le i,j\le n\\i + j = n}}K_i^{(1)} \otimes K_j^{(1)}\end{pmatrix}
+.\end{align}
+
+\subsection{Bounds on the Forward Operators}
+\begin{defn}
+	Let $K$ be a multilinear operator of order $n$ on $\left[ L^{\infty}\left( \Omega \right) \right]^{n}$. Define
+\[
+	\left| K \right|_{\infty}
+	\coloneqq \sup_{\substack{\alpha_{i} \neq 0\\ 1\le i\le n}} \frac{\lVert K\left( \alpha_1,\ldots,\alpha_{n} \right) \rVert_{C\left( \pp{\Omega}\times \pp{\Omega} \right)}}{\lVert \alpha_1 \rVert_{\infty}\cdots \lVert \alpha_{n} \rVert_{\infty}}
+.\]
+\end{defn}
+
+	Note that if $T$ and $K$ is are multilinear operators of order $n$, then the triangle inequality
+	\[
+	\left| T + K \right|_{\infty} \le \left| T \right|_{\infty} + \left| K \right|_{\infty}
+	\] 
+	holds.
+
+	Define $\mu$ as it was defined in \Cref{sec2}, that is $\mu \coloneqq \max \left\{ \mu_1,\mu_2 \right\}$ where 
+\begin{align*}
+	\mu_1 &\coloneqq 8\pi k^2 \sup_{x \in \Omega}\int_{\Omega}^{} \left| G\left(k; x,y \right) \right|  \dd{y},\\
+	\mu_{2}&\coloneqq 8\pi k^2 \sup_{x \in \Omega}\int_{\Omega}^{} \left| G\left(2k; x,y \right) \right|  \dd{y}
+.\end{align*}
+
+\begin{lem}\label{nuLem}
+	The components $K_{n}^{(1)}$ and $K_{n}^{(2)}$ of $K_{n}$ defined by \cref{fwop} are bounded multilinear operators and
+	\[
+	\left| K_{n}^{(1)} \right|_{\infty} \le \nu_{n}^{(1)}\mu^{n}
+	\quad \text{and} \quad
+	\left| K_{n}^{(2)} \right|_{\infty} \le \nu_{n}^{(2)}\mu^{n}
+	,\] 
+	where
+	\[
+	\nu_0^{(1)} = \lVert u_0^{(1)} \rVert_{C\left( \overline{\Omega}\times \delta \Omega \right)}
+	\quad \text{and} \quad
+	\nu_0^{(2)} = \lVert u_0^{(2)} \rVert_{C\left( \overline{\Omega}\times \delta \Omega \right)}
+	,\] 
+	and for each $n \ge 0$,
+	\begin{align}
+		\label{nu1}\nu_{n + 1}^{(1)} &= \sum_{\substack{0\le i,j\le n\\i + j = n}} \nu_{i}^{(1)} \nu_{j}^{(2)},\\
+		\label{nu2}\nu_{n + 1}^{(2)} &= \sum_{\substack{0\le i,j\le n\\i + j = n}} \nu_{i}^{(1)} \nu_{j}^{(1)}
+	.\end{align} 
+\end{lem}
+	First, note that for the product given in \Cref{H1H2}, we have
+	\[
+		\left| H_1 T_{k} \right|_{\infty} \le \mu \left| T_{k} \right|_{\infty}
+		\quad \text{and} \quad
+		\left| H_2 T_{k} \right|_{\infty} \le \mu \left| T_{k} \right|_{\infty}
+	.\] 
+Also, we have
+\[
+	\left| T_{k}\otimes T_{j} \right|_{\infty} \le \left| T_{k} \right|_{\infty}\left| T_{j} \right|_{\infty}
+.\] 
+\begin{proof}
+	Proof by induction on $n$.
+	For the base case, it's obvious that $\left| K_{0}^{(1)} \right|_{\infty} = \nu_{0}^{(1)}$ and $\left| K_{0} \right|_{\infty}= \nu_0^{(2)}$.
+
+	For the induction step, suppose that for each $i\le n$, we have
+\[
+	\left| K_{i}^{(1)} \right|_{\infty} \le \nu_{i}^{(1)}\mu^{i}
+	\quad \text{and} \quad
+	\left| K_{i}^{(2)} \right|_{\infty} \le \nu_{i}^{(2)}\mu^{i}
+	.\]
+	Then, by \cref{fwop},
+	\begin{align*}
+		\left| K_{n + 1}^{(1)} \right|_{\infty}
+		&= \left| H_1 \sum_{\substack{0\le i,j\le n\\i + j = n}} K_{k}^{(1)}\otimes K_{j}^{(2)}\right|_{\infty} \\
+		&\le \mu \sum_{\substack{0\le i,j\le n\\i + j = n}} \left| K_{i}^{(1)} \right|_{\infty}\left| K_{j}^{(2)} \right|_{\infty} \\
+		&\le \mu \sum_{\substack{0\le i,j\le n\\i + j = n}}\nu_{i}^{(1)}\mu^{(i)} \nu_{j}^{(2)}\mu^{(j)} \\
+		&= \mu^{n + 1} \sum_{\substack{0\le i,j\le n\\i + j = n}}\nu_{i}^{(1)}\nu_{j}^{(2)}\\
+		&= \mu^{n + 1}\nu_{n + 1}^{(1)}
+	.\end{align*}
+	A similar computation reveals that $\left| K_{n + 1}^{(2)} \right|_{\infty}\le \mu^{n + 1}\nu_{n + 1}^{(2)}$.
+\end{proof}
+
+%I don't think I wanna do this. I think I wanna replicate the generating function proof of each \nu_{k}^(i) first and then combine the results at the end.
+\iffalse
+Using the previous lemma, we can bound the forward operators. First, we define 
+\begin{equation}\label{nu}
+	\nu_{n} \coloneqq \left[\left(\nu_{n}^{(1)}\right)^2 + \left(\nu_{n}^{(2)}\right)^2 \right]^{1/2}
+.\end{equation} 
+\begin{cor}
+	The forward operators $K_n$ are bounded multilinear operators from $\left[ L^{\infty}\left( \Omega \right) \right]^{n}$ to $C\left( \pp{\Omega}\times \pp{\Omega} \right)^2$ that satisfy
+	\[
+	\lVert K_{n} \rVert= \lVert \begin{pmatrix} \left| K_{n}^{(1)} \right|_{\infty}\\\left| K_{n}^{(2)} \right|_{_{\infty}} \end{pmatrix} \rVert \le \nu_{n}\mu^{n}  
+	.\] 
+\end{cor}
+\fi
+
+\begin{lem}
+	For the sequences $\{ \nu_{n}^{(1)} \}$ and $\{ \nu_{n}^{(2)} \}$ defined in \Cref{nuLem}, there exist constants $\nu^{(1)},\nu^{(2)}$ and $\kappa^{(1)}, \kappa^{(2)}$ such that
+	\begin{align}
+		\label{convg1}\nu_{n}^{(1)} &\le \nu^{(1)} \left( \kappa^{(1)} \right)^{n}\\
+		\label{convg2}\nu_{n}^{(2)} &\le \nu^{(2)} \left( \kappa^{(2)} \right)^{n}
+	.\end{align} 
+	\[
+	\nu^{(1)} = \nu^{(2)} = \lVert u_0 \rVert_{C\left( \overline{\Omega} \times \pp{\Omega} \right)^2}
+	\] 
+	and 
+	\[
+		%K^{(1)} = K^{(2)} = 4\lVert u_0 \rVert_{C\left( \overline{\Omega} \times \pp{\Omega} \right)^2}
+		\kappa^{(1)} = \kappa^{(2)} = 4\lVert u_0 \rVert_{C\left( \overline{\Omega} \times \pp{\Omega} \right)^2}
+	.\] 
+\end{lem}
+\begin{proof}
+	Let
+	\begin{align*}
+		P\left( x \right) &= \sum_{n=0}^{\infty} \nu_{n}^{(1)}x^{n} \\
+		Q\left( x \right) &= \sum_{n=0}^{\infty} \nu_{n}^{(2)}x^{n}
+	.\end{align*}
+	Then we have that
+	\[
+	P\left( x \right) Q\left( x \right) = \sum_{n=0}^{\infty} \sum_{i + j = n}^{} \nu_{i}^{(1)}\nu_{j}^{(2)}x^{n}
+	\] 
+	and 
+	\[
+		\left( P\left( x \right) \right) ^2
+		= \sum_{n=0}^{\infty} \sum_{i + j = n} \nu_{i}^{(1)}\nu_{j}^{(1)}x^{n}
+	.\] 
+Thus, we can multiply \cref{nu1,nu2} by $x^{n}$ and sum to obtain
+\begin{align}
+	\label{Px}\frac{P\left( x \right) -\nu_0^{(1)}}{x} &= P\left( x \right) Q\left( x \right)  \\
+	\label{Qx}\frac{Q\left( x \right) -\nu_0^{(2)}}{x} &= \left(P\left( x \right)\right)^2
+.\end{align}
+We may transform $\cref{Qx}$ into the form $Q= x P^2 + \nu_0^{(2)}$ and plug back into \cref{Px} to obtain
+\[
+x^2P^3+ x\nu_0^{(2)}P- P +\nu_0^{(1)} = 0
+.\] 
+Differentiate with respect $x$ and obtain
+\[
+3x^2P^2P' + 2xP^3 + \nu_0^{(2)}P + x\nu_0^{(2)}P' - P' = 0
+.\] 
+Thus,
+\[
+P'\left(3x^2P^2+ x\nu_0^{(2)}-1\right) = -2xP^3 - \nu_0^{(2)}P
+.\] 
+and so
+\begin{equation}\label{odefin}
+P' = -\frac{2xP^3 + \nu_0^{(2)}P}{3x^2P^2 + x\nu_0^{(2)}- 1}
+.\end{equation} 
+Now, as long as $3x^2P^2 + x\nu_0^{(2)}- 1 \neq 0$, $P'$ is an analytic function of $x$ and $P$ which means that there is a unique analytic solution for \cref{odefin} which is exactly $P\left( x \right)$. 
+Thus, the power series $P\left( x \right) $ has a positive radius of convergence.
+
+Since $Q = xP^2+ \nu_0^{(2)}$, whenever $P\left( x \right) $ is an analytic function, so is $Q\left( x \right)$.
+Thus, both $P\left( x \right)$ and $Q\left( x \right)$ have positive radii of convergence and the proof is complete.
+\end{proof}
+
+%TODO get explicit values for K^(1) and K^(2) and $\nu^(1) and \nu^(2)
+%TODO switch $K^(1)$ to \kappa^(1)\ldots
+
+\begin{prop}\label{convgprop}
+	The forward operator $K_{n}$ given by \cref{fwop} is a bounded multilinear operator from $\left[ L^{\infty}\left( \Omega \right)\right]^{n} $ to $ C\left( \pp{\Omega} \right)  ^2$, and
+	\begin{equation}\label{fwopbnd}
+		\left| K_{n} \right| \le \nu \left( \kappa \mu \right)^{n}
+	\end{equation}
+	where $\kappa = \max \left\{ \kappa^{(1)}, \kappa^{(2)} \right\}$,
+	$\nu = 2\max \left\{ \nu^{(1)}, \nu^{(2)} \right\}$,
+	and $\mu =\max \left\{ \mu_1,\mu_2 \right\} $ for
+	\[
+	\mu_1 = 8\pi k^2 \sup_{x \in \Omega}\int_{\Omega}^{} \left| G\left( k; x, y \right)  \right| \dd{y}
+	\qquad \text{and} \qquad
+	\mu_2 = 16\pi k^2 \sup_{x \in \Omega}\int_{\Omega}^{} \left| G\left( 2k; x, y \right)  \right| \dd{y}
+	\] 
+	as in \cref{sec2}.
+\end{prop}
+\begin{proof}
+	\begin{align*}
+		\left| K_{n} \right|^2 &= \left| \begin{pmatrix} K_{n}^{(1)}\\K_{n}^{(2)} \end{pmatrix}  \right|^2\\
+	&= \left| K_{n}^{(1)} \right|_{\infty}^2 + \left| K_{n}^{(1)}\right|_{\infty}^2\\
+	&\le \left( \nu^{(1)} \left( \kappa^{(1)}\mu \right)^n \right)^2 +  \left( \nu^{(2)} \left( \kappa^{(2)}\mu \right)^n \right)^2\\
+	&\le \left( \nu^{(1)} \left(\kappa^{(1)}\mu \right)^n + \nu^{(2)} \left( \kappa^{(2)}\mu \right)^n \right)^2\\
+	&\le \nu^2 \left( \kappa\mu \right)^{2n}
+	.\end{align*}
+\end{proof}
+
+\begin{cor}
+	The Born series 
+	\[
+	u = u_0 + \sum_{n=1}^{\infty} K_{n}\left( \eta,\ldots,\eta \right) 
+	\] 
+	where $K_{n}$ are given by \cref{fwop} converges in $C\left( \overline{\Omega} \right)^2$ for
+	\[
+	\lVert \eta \rVert_{\infty} \le  \frac{1}{\kappa \mu}
+	.\] 
+\end{cor}
+
+
+\section{Inverse Born Series}
+
+The inverse problem is to reconstruct the coefficient $\eta$ from measurements on the boundary $\phi = u - u_0$ on $\pp{\Omega}$.
+We define the Inverse Born Series (IBS) as 
+\begin{equation}\label{ibs}
+	\tilde{\eta} = \mathcal{K}_{1}\left(\phi\right) + \mathcal{K}_{2}\left( \phi \right) + \mathcal{K}_{3}\left( \phi \right) + \cdots
+\end{equation}
+where the data $\phi \in  C\left( \pp{\Omega} \right) ^2$.
+We have already seen the IBS analyzed in \cite{Hoskins_2022, Moskow_2008}. The inverse operators $\mathcal{K}_{m}$ are given by
+\begin{align*}
+	\mathcal{K}_{1}\left( \phi \right) &= K_1^{+}\left( \phi \right),\\
+	\mathcal{K}_{2}\left( \phi \right) &= -\mathcal{K}_1\left( K_2\left( \mathcal{K}_1\left( \phi \right) , \mathcal{K}_{1}\left( \phi \right)  \right)  \right) ,\\
+	\mathcal{K}_{m}\left( \phi \right)  &=  -\sum_{n=2}^{m} \, \sum_{i_1 + \cdots + i_{n} = m} \mathcal{K}_{1}\left(K_{n}\left( \mathcal{K}_{i_{1}}\left( \phi \right) , \ldots, \mathcal{K}_{i_{n}}\left( \phi \right)  \right)\right)
+.\end{align*}
+Note that the operator $K_1$ does not, in general, have a bounded inverse. Thus, we take $\mathcal{K}_{1}$ to be the regularized pseudoinverse $K_{1}^{+}$ of $K_1$ as described in \cite{MoskowSchotland+2019+273+296}.
+Now, our bounds on the forward operators given in \cref{convgprop} in combination with theorems 2.2 and 2.4 of \cite{Hoskins_2022} gives the next two theorems on convergence and approximation error of the IBS.
+\begin{note}
+	We denote by $\lVert \mathcal{K}_{1} \rVert$ the operator norm of $\mathcal{K}_{1}$ as a map from $C\left( \pp{\Omega} \right)^2$ to $L^{\infty}\left( \Omega \right)$.
+\end{note}
+
+\begin{thm}[convergence of the IBS]\label{ibsconvg}
+	If $\lVert \mathcal{K_1}\left( \phi \right)  \rVert< r$ where
+	\[
+	r = \frac{1}{2\kappa \mu}\left( \sqrt{16 C^2 + 1} -4C \right)
+	,\] 
+	$C = \max \left\{ 2, \lVert \mathcal{K}_{1}\rVert \nu \kappa \mu \right\} $, and $\nu, \kappa$ are the same as in \Cref{convgprop}, then the IBS \cref{ibs} converges.
+\end{thm}
+
+\begin{thm}[approximation error] Suppose that the hypotheses of \Cref{ibsconvg} hold and that the Born and IBS converge.
+	Let $\overline{\eta}$ denote the sum of the IBS and $\eta_1 = \mathcal{K}_{1}\left( \phi \right)$.
+	Let $\mathcal{M} = \max \left\{ \lVert \eta \rVert_{\infty}, \lVert \tilde{\eta} \rVert_{\infty} \right\} $.
+	Also assume that
+	\begin{equation}\label{convgerror}
+		\mathcal{M} < \frac{1}{2\kappa \mu}\left( 1 - \sqrt{\frac{\nu\kappa\mu \lVert \mathcal{K}_{1} \rVert}{1 + \nu\kappa\mu \lVert \mathcal{K}_{1} \rVert}}\right)
+	.\end{equation}
+Then the approximation error of reconstruction can be estimated as follows:
+\begin{align*}
+	\lVert \eta - \sum_{m=1}^{N} \mathcal{K}_{m}\left( \phi \right)  \rVert_{\infty}
+	&\le M\left( \frac{\lVert \eta_1 \rVert_{\infty}}{r} \right)^{N + 1}\frac{1}{1-\frac{\lVert \eta_1 \rVert_{\infty}}{r}}\\
+	&+ \left( 1-\frac{\nu\kappa\mu \lVert \mathcal{K}_{1} \rVert}{\left( 1-\mu \mathcal{M} \right)^2} + \nu\kappa\mu \lVert \mathcal{K}_{1} \rVert \right)^{-1} \lVert \left( I-\mathcal{K}_{1}K_1 \right) \eta \rVert_{\infty}
+,\end{align*}
+where
+\[
+M = \frac{2\mu\kappa}{\sqrt{16C + 1}}
+.\] 
+\end{thm}
+\section{Appendix: Existence and Uniqueness}\label{sec2}
+
+Our main tool in proving the existence and uniqueness of solutions is the Banach fixed point theorem.
+Before stating the theorem, we give an important definition.
+
+\begin{defn}
+	Let $X$ be a normed vector space and let $B$ be a closed ball in $X$.
+	A map $T\colon X\to X$ is called a \textit{contraction} on the closed ball $B$ if for any $f,g \in B$, we have
+	\[
+	\lVert T\left( f \right) -T\left( g \right) \rVert \le p \lVert f-g \rVert
+	\]
+	where $0< p < 1$.
+\end{defn}
+%TODO add the fixed point converges part
+\begin{thm}[Banach]\label{thm1}
+	Let $X$ be a Banach space and let $T\colon X\to X$ be a contraction on a closed ball $B\subseteq X$.
+	If $T\left( B \right) \subseteq B$, then $T$ has a unique fixed point in $B$, that is, some $x \in B$ satisfies $T\left( x \right) = x$.
+\end{thm}
+
+Let $G\left( k; x, y \right) $ be the Green's function for the operator $\Delta u^{(1)} + k^2$
+and
+$G\left( 2k; x, y \right) $ be the Green's function for the operator $\Delta u^{(1)} + \left( 2k \right)^2$ as in \Cref{intro}.
+Let
+\[
+	T\colon C\left( \overline{\Omega} \right)^2\to C\left( \overline{\Omega} \right)^2
+\]
+be given by
+\begin{equation}\label{intro:2}
+T\begin{pmatrix} u^{(1)}\\u^{(2)} \end{pmatrix}  = \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix} +
+\begin{pmatrix}
+	-8\pi k^2 \int_{\Omega}^{} G\left(k; x,y \right) \eta\left( y \right) u^{(1)}\left( y \right) u^{(2)}\left( y \right)\dd{y}\\
+	-4 \pi \left( 2k \right) ^2\int_{\Omega}^{} G\left( 2k; x,y \right) \eta\left( y \right) \left(u^{(1)}\right)^2\left( y \right)\dd{y}
+\end{pmatrix}
+.\end{equation}
+
+If we can prove that \cref{intro:2} satisfies the hypothesis of \Cref{thm1} for some ball $B \subseteq C\left( \overline{\Omega} \right)^2$, then we will obtain a unique
+$u= \begin{pmatrix} u^{(1)}\\u^{(2)} \end{pmatrix} \in C\left( \overline{\Omega} \right)^2$ that satisfies \cref{eq:1:1}, solving our PDEs.
+
+
+We begin by making precise some of our statements in the introduction.
+Define the norm $\lVert \cdot  \rVert$ on $C\left( \overline{\Omega} \right)^2$ to be
+\[
+\left\lVert \begin{pmatrix} u^{(1)}\\u^{(2)}\end{pmatrix} \right\rVert
+\coloneqq
+\lVert u^{(1)} \rVert_{C\left( \overline{\Omega} \right)}+
+\lVert u^{(2)} \rVert_{C\left( \overline{\Omega} \right)}
+.\]
+Let
+\begin{equation}\label{eq:1}
+G\begin{pmatrix} u^{(1)}\\u^{(2)} \end{pmatrix}\coloneqq
+\begin{pmatrix}
+	-8\pi k^2 \int_{\Omega}^{} G\left(k; x,y \right) \eta\left( y \right) u^{(1)}\left( y \right) u^{(2)}\left( y \right)\dd{y}\\
+	-4 \pi \left( 2k \right)^2\int_{\Omega}^{} G\left(2k; x,y \right) \eta\left( y \right) \left(u^{(1)}\right)^2\left( y \right)\dd{y}
+\end{pmatrix}
+.\end{equation}
+Then, define the operator
+\[
+T\begin{pmatrix} u^{(1)}\\u^{(2)} \end{pmatrix}  = \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix} + G \begin{pmatrix} u^{(1)}\\u^{(2)} \end{pmatrix}
+.\]
+\iffalse
+\begin{align*}
+	K_1 &\coloneqq-8\pi k^2 \int_{\Omega}^{} G\left( x,y \right) \eta\left( y \right) u^{(1)}\left( y \right) u^{(2)}\left( y \right)\dd{y}\\
+	K_2 &\coloneqq-8\pi k^2 \int_{\Omega}^{} G\left( x,y \right) \eta\left( y \right) u^{(1)}^2\left( y \right)\dd{y}
+\end{align*}
+\fi
+To bound the norm of $G$ in \cref{eq:1}, we define
+\begin{align*}
+	\mu_1 &\coloneqq 8\pi k^2 \sup_{x \in \Omega}\int_{\Omega}^{} \left| G\left(k; x,y \right) \right|  \dd{y}\\
+	\mu_{2}&\coloneqq 16\pi k^2 \sup_{x \in \Omega}\int_{\Omega}^{} \left| G\left(2k; x,y \right) \right|  \dd{y}
+\end{align*}
+and let $\mu \coloneqq \max \left\{ \mu_1,\mu_2 \right\}$.
+Now, we have
+\iffalse
+\begin{align*}
+	\lVert K_1 \rVert &\le \mu\lVert \eta \rVert \lVert u^{(1)} u^{(2)} \rVert\le \mu\lVert \eta \rVert\lVert u^{(1)} \rVert\lVert u^{(2)} \rVert\\
+	\lVert K_2 \rVert &\le \mu\lVert \eta \rVert \lVert u^{(1)}^2 \rVert \le \mu \lVert \eta \rVert\lVert u^{(1)} \rVert^2
+.\end{align*}
+\fi
+\begin{align*}
+	\left\lVert-8\pi k^2 \int_{\Omega}^{} G\left( x,y \right) \eta\left( y \right) u^{(1)}\left( y \right) u^{(2)}\left( y \right)\dd{y} \right\rVert
+	&\le \mu\lVert \eta \rVert\lVert u^{(1)} \rVert\lVert u^{(2)} \rVert\\
+	\left\lVert-4\pi \left( 2k \right)^2 \int_{\Omega}^{} G\left( x,y \right) \eta\left( y \right) \left(u^{(1)}\right)^2\left( y \right)\dd{y} \right\rVert
+	&\le \mu \lVert \eta \rVert\lVert u^{(1)} \rVert^2
+.\end{align*}
+
+Remember that our goal is to show that $T$ satisfies \Cref{thm1}.
+We begin by giving conditions under which $T$ is a contraction.
+\begin{lem}\label{lem:1}
+	Let $f = \begin{pmatrix} f^{(1)}\\f^{(2)} \end{pmatrix} $ and $g = \begin{pmatrix} g^{(1)}\\g^{(2)} \end{pmatrix}$.
+	Let such that $\lVert f \rVert, \lVert g \rVert \le R$.
+	Then,
+	\[
+	\lVert T f - T g \rVert
+	\le q \lVert f - g \rVert
+	\]
+	where
+	\[
+	q = 2R\mu \lVert \eta \rVert
+	.\]
+\end{lem}
+\begin{proof}
+	Notice that
+	\[
+		T\left( f \right)  -T\left( g \right)
+=
+	\begin{pmatrix}
+	-8\pi k^2 \int_{\Omega}^{} G\left( x,y \right) \eta\left( y \right) \left( f^{(1)}\left( y \right) f^{(2)}\left( y \right) -g^{(1)}\left( y \right) g^{(2)}\left( y \right)  \right) \dd{y}\\
+	-8 \pi k^2\int_{\Omega}^{} G\left( x,y \right) \eta\left( y \right) \left(\left( f^{(1)}\right)^2\left( y \right) -\left(g^{(1)}\right)^2\left( y \right)  \right) \dd{y}
+\end{pmatrix}
+	\]
+	so
+	\begin{align*}
+		\lVert T\left( f \right) -T\left( g \right)\rVert &\le \mu \lVert \eta \rVert \lVert f^{(1)}f^{(2)}-g^{(1)}g^{(2)} \rVert + \mu \lVert \eta \rVert \lVert \left(f^{(1)}\right)^2 - \left(g^{(1)}\right)^2 \rVert\\
+		&\le \mu \lVert \eta \rVert \Big[ \lVert \left( f^{(1)}-g^{(1)} \right)f^{(2)} + \left( f^{(2)}-g^{(2)} \right)g^{(1)} \rVert + \lVert f^{(1)} + g^{(1)} \rVert\lVert f^{(1)}-g^{(1)} \rVert \Big] \\
+		&\le \mu \lVert \eta \rVert \Big[ \lVert \left( f^{(1)}-g^{(1)} \right)\rVert\lVert f^{(2)} \rVert + \lVert \left( f^{(2)}-g^{(2)} \right)\rVert\lVert g^{(1)} \rVert + \left( \lVert f^{(1)} \rVert + \lVert g^{(1)} \rVert \right) \lVert f^{(1)}-g^{(1)} \rVert \Big] \\
+		&= \mu \lVert \eta \rVert \Big[\left( \lVert f^{(1)} \rVert+ \lVert f^{(2)} \rVert+ \lVert g^{(1)} \rVert \right) \lVert f^{(1)}-g^{(1)} \rVert + \lVert g^{(1)} \rVert \lVert f^{(2)}-g^{(2)} \rVert  \Big]  \\
+		&< \mu \lVert \eta \rVert \Big[2R \lVert f^{(1)}-g^{(1)} \rVert +R \lVert f^{(2)}-g^{(2)} \rVert  \Big] \\
+		&< \mu \lVert \eta \rVert \Big[2R \lVert f^{(1)}-g^{(1)} \rVert +2R \lVert f^{(2)}-g^{(2)} \rVert  \Big]\\
+		&= 2R\mu \lVert \eta \rVert \Big[\lVert f^{(1)}-g^{(1)} \rVert +\lVert f^{(2)}-g^{(2)} \rVert  \Big]\\
+		&=2R \mu \lVert \eta \rVert \lVert f-g \rVert
+	.\end{align*}
+\end{proof}
+
+The next lemma gives a ball that $T$ maps into itself (a ball $B\subseteq C\left( \overline{\Omega} \right)^2$ for which $T\left( B \right) \subseteq B$).
+\begin{lem}\label{lem:2}
+	Let $r > 0$ and let $B\left( u_0,r \right)$ be the ball of radius $r$ about $u_0 \coloneqq \begin{pmatrix} u_0^{(1)}\\u_0^{(2)} \end{pmatrix} $ in $C^{0}\left( \overline{\Omega} \right)^2$.
+	Define $R\coloneqq \lVert u_0 \rVert+ r$. Then if
+	\[
+	\mu R^2 \lVert \eta \rVert< r
+	,\]
+	T maps $B\left( u_0,r \right)$ into itself.
+\end{lem}
+\begin{proof}
+	Let $f = \begin{pmatrix} f^{(1)}\\f^{(2)} \end{pmatrix} \in B\left( u_0,r \right)$.
+	Then,
+	\begin{align*}
+\lVert T\left( f \right) -u_0 \rVert&= \left\lVert G\begin{pmatrix} f^{(1)}\\f^{(2)} \end{pmatrix}\right\rVert \\
+	&\le \mu\lVert \eta \rVert \lVert f^{(1)} \rVert\lVert f^{(2)} \rVert+ \mu \lVert \eta \rVert \lVert f^{(1)} \rVert^2\\
+	&= \mu \lVert \eta \rVert\left( \lVert f^{(1)} \rVert\lVert f^{(2)} \rVert+ \lVert f^{(1)} \rVert^2 \right) \\
+	&= \mu \lVert \eta \rVert \lVert f^{(1)} \rVert\left( \lVert f^{(2)} \rVert+ \lVert f^{(1)} \rVert \right) \\
+	&< \mu \lVert \eta \rVert \lVert f^{(1)} \rVert R \\
+	&< \mu \lVert \eta \rVert R^2
+	.\end{align*}
+\end{proof}
+Since \Cref{lem:1} gives conditions for $T$ to be a contraction and  \Cref{lem:2} gives a ball that $T$ maps into itself,
+if we can find $R > 0$ that satisfies both lemmas
+simultaneously, we will have satisfied all hypothesis in \Cref{thm1} and solve our problem.
+%TODO put thin in DM mode, it's the main result of the section. Maybe move the final result to the beginning.
+\begin{prop}\label{lastprop}
+	If
+	\begin{equation}
+		\lVert \eta \rVert \le \frac{1}{4\mu\lVert u_0 \rVert}
+	,\end{equation}
+	then $T$ has a unique fixed point in the ball $B\left( u_0, \lVert u_0 \rVert \right)$.
+\end{prop}
+\begin{proof}
+	First, $r = \lVert u_0 \rVert\implies R = 2\lVert u_0 \rVert$.
+	Thus,
+	\begin{align*}
+		\mu\lVert \eta \rVert 2R &\le \mu \lVert \eta \rVert 4 \lVert u_0 \rVert\\
+	&< \mu 4 \lVert u_0 \rVert\cdot \frac{1}{\mu 4 \lVert u_0 \rVert}\\
+	&= 1
+	.\end{align*}
+	And so we have satisfied \Cref{lem:1}.
+	Now,
+	\begin{align*}
+	\mu \lVert \eta \rVert R^2 &\le \mu \lVert \eta \rVert \left( 2\lVert u_0 \rVert \right)^2\\
+	&< \mu \frac{1}{4 \lVert u_0 \rVert}\cdot 4 \lVert u_0 \rVert^2\\
+	 &= \lVert u_0 \rVert
+	.\end{align*}
+	Thus \Cref{lem:2} is also satisfied which implies that $T$ has a unique fix point on $B\left( u_0, \lVert u_0 \rVert \right)$.
+\end{proof}
+
+\begin{rem}
+	Note that with \Cref{lastprop}, we have guaranteed the existence and uniqueness of solutions for any data (not just small input data).
+\end{rem}
+
+\section{Acknowledgments}
+I would like to thank Shari Moskow for being such an excellent mentor. None of this work would be possible without her patience and guidance.
+Much of my understanding of the subject comes from her detailed explanations--they have depend my appreciation for both PDEs and inverse problems.
+
+\printbibliography
+
+\end{document}

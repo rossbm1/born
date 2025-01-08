@@ -1,0 +1,224 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{DeFilippis_2023}{article}{}
+      \name{author}{3}{}{%
+        {{hash=dafb3ec4379cb3ec79149468dcf900c1}{%
+           family={DeFilippis},
+           familyi={D\bibinitperiod},
+           given={Nicholas},
+           giveni={N\bibinitperiod}}}%
+        {{hash=e591a0fa7dc07ccf6a703a8c9bb3ce11}{%
+           family={Moskow},
+           familyi={M\bibinitperiod},
+           given={Shari},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7569dfed89e3e9c9e6338108c30f4f0b}{%
+           family={Schotland},
+           familyi={S\bibinitperiod},
+           given={John\bibnamedelima C},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IOP Publishing}%
+      }
+      \strng{namehash}{b64055dac876ee0ac48ed2cca6995d1e}
+      \strng{fullhash}{b64055dac876ee0ac48ed2cca6995d1e}
+      \strng{bibnamehash}{b64055dac876ee0ac48ed2cca6995d1e}
+      \strng{authorbibnamehash}{b64055dac876ee0ac48ed2cca6995d1e}
+      \strng{authornamehash}{b64055dac876ee0ac48ed2cca6995d1e}
+      \strng{authorfullhash}{b64055dac876ee0ac48ed2cca6995d1e}
+      \field{sortinit}{D}
+      \field{sortinithash}{6f385f66841fb5e82009dc833c761848}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We consider the Born and inverse Born series for scalar waves with a cubic nonlinearity of Kerr type. We find a recursive formula for the operators in the Born series and prove their boundedness. This result gives conditions which guarantee convergence of the Born series, and subsequently yields conditions which guarantee convergence of the inverse Born series. We also use fixed point theory to give alternate explicit conditions for convergence of the Born series. We illustrate our results with numerical experiments.}
+      \field{journaltitle}{Inverse Problems}
+      \field{month}{11}
+      \field{number}{12}
+      \field{title}{Born and inverse Born series for scattering problems with Kerr nonlinearities}
+      \field{volume}{39}
+      \field{year}{2023}
+      \field{pages}{125015}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1088/1361-6420/ad07a5
+      \endverb
+      \verb{urlraw}
+      \verb https://dx.doi.org/10.1088/1361-6420/ad07a5
+      \endverb
+      \verb{url}
+      \verb https://dx.doi.org/10.1088/1361-6420/ad07a5
+      \endverb
+    \endentry
+    \entry{Hoskins_2022}{article}{}
+      \name{author}{2}{}{%
+        {{hash=6d756f926d7c25784ccbed67a423d6b9}{%
+           family={Hoskins},
+           familyi={H\bibinitperiod},
+           given={Jeremy\bibnamedelima G},
+           giveni={J\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=7569dfed89e3e9c9e6338108c30f4f0b}{%
+           family={Schotland},
+           familyi={S\bibinitperiod},
+           given={John\bibnamedelima C},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {IOP Publishing}%
+      }
+      \strng{namehash}{224be30ed527835cee868ffa04fb0646}
+      \strng{fullhash}{224be30ed527835cee868ffa04fb0646}
+      \strng{bibnamehash}{224be30ed527835cee868ffa04fb0646}
+      \strng{authorbibnamehash}{224be30ed527835cee868ffa04fb0646}
+      \strng{authornamehash}{224be30ed527835cee868ffa04fb0646}
+      \strng{authorfullhash}{224be30ed527835cee868ffa04fb0646}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We analyze the convergence and approximation error of the inverse Born series, obtaining results that hold under qualitatively weaker conditions than previously known. Our approach makes use of tools from geometric function theory in Banach spaces. An application to the inverse scattering problem with diffuse waves is described.}
+      \field{journaltitle}{Inverse Problems}
+      \field{month}{5}
+      \field{number}{7}
+      \field{title}{Analysis of the inverse Born series: an approach through geometric function theory}
+      \field{volume}{38}
+      \field{year}{2022}
+      \field{pages}{074001}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1088/1361-6420/ac661f
+      \endverb
+      \verb{urlraw}
+      \verb https://dx.doi.org/10.1088/1361-6420/ac661f
+      \endverb
+      \verb{url}
+      \verb https://dx.doi.org/10.1088/1361-6420/ac661f
+      \endverb
+    \endentry
+    \entry{Moskow_2008}{article}{}
+      \name{author}{2}{}{%
+        {{hash=e591a0fa7dc07ccf6a703a8c9bb3ce11}{%
+           family={Moskow},
+           familyi={M\bibinitperiod},
+           given={Shari},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7569dfed89e3e9c9e6338108c30f4f0b}{%
+           family={Schotland},
+           familyi={S\bibinitperiod},
+           given={John\bibnamedelima C},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{abbec7b451225b28096070fd7c0000c8}
+      \strng{fullhash}{abbec7b451225b28096070fd7c0000c8}
+      \strng{bibnamehash}{abbec7b451225b28096070fd7c0000c8}
+      \strng{authorbibnamehash}{abbec7b451225b28096070fd7c0000c8}
+      \strng{authornamehash}{abbec7b451225b28096070fd7c0000c8}
+      \strng{authorfullhash}{abbec7b451225b28096070fd7c0000c8}
+      \field{extraname}{1}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We analyze the inverse scattering series for diffuse waves in random media. In previous work the inverse series was used to develop fast, direct image reconstruction algorithms in optical tomography. Here we characterize the convergence, stability and approximation error of the series.}
+      \field{journaltitle}{Inverse Problems}
+      \field{month}{9}
+      \field{number}{6}
+      \field{title}{Convergence and stability of the inverse scattering series for diffuse waves}
+      \field{volume}{24}
+      \field{year}{2008}
+      \field{pages}{065005}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1088/0266-5611/24/6/065005
+      \endverb
+      \verb{urlraw}
+      \verb https://dx.doi.org/10.1088/0266-5611/24/6/065005
+      \endverb
+      \verb{url}
+      \verb https://dx.doi.org/10.1088/0266-5611/24/6/065005
+      \endverb
+    \endentry
+    \entry{MoskowSchotland+2019+273+296}{inbook}{}
+      \name{author}{2}{}{%
+        {{hash=e591a0fa7dc07ccf6a703a8c9bb3ce11}{%
+           family={Moskow},
+           familyi={M\bibinitperiod},
+           given={Shari},
+           giveni={S\bibinitperiod}}}%
+        {{hash=7569dfed89e3e9c9e6338108c30f4f0b}{%
+           family={Schotland},
+           familyi={S\bibinitperiod},
+           given={John\bibnamedelima C.},
+           giveni={J\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \name{editor}{2}{}{%
+        {{hash=0249f75799a7c13b06769295d658077e}{%
+           family={Ramlau},
+           familyi={R\bibinitperiod},
+           given={Ronny},
+           giveni={R\bibinitperiod}}}%
+        {{hash=a897e76f4448c67db7ce8cf9f179f483}{%
+           family={Scherzer},
+           familyi={S\bibinitperiod},
+           given={Otmar},
+           giveni={O\bibinitperiod}}}%
+      }
+      \list{location}{1}{%
+        {Berlin, Boston}%
+      }
+      \list{publisher}{1}{%
+        {De Gruyter}%
+      }
+      \strng{namehash}{abbec7b451225b28096070fd7c0000c8}
+      \strng{fullhash}{abbec7b451225b28096070fd7c0000c8}
+      \strng{bibnamehash}{abbec7b451225b28096070fd7c0000c8}
+      \strng{authorbibnamehash}{abbec7b451225b28096070fd7c0000c8}
+      \strng{authornamehash}{abbec7b451225b28096070fd7c0000c8}
+      \strng{authorfullhash}{abbec7b451225b28096070fd7c0000c8}
+      \strng{editorbibnamehash}{805b82f691cebdcf74768041f1e7ce88}
+      \strng{editornamehash}{805b82f691cebdcf74768041f1e7ce88}
+      \strng{editorfullhash}{805b82f691cebdcf74768041f1e7ce88}
+      \field{extraname}{2}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{booktitle}{The First 100 Years and Beyond}
+      \field{isbn}{9783110560855}
+      \field{title}{12. Inverse Born series}
+      \field{year}{2019}
+      \field{pages}{273\bibrangedash 296}
+      \range{pages}{24}
+      \verb{doi}
+      \verb doi:10.1515/9783110560855-012
+      \endverb
+      \verb{urlraw}
+      \verb https://doi.org/10.1515/9783110560855-012
+      \endverb
+      \verb{url}
+      \verb https://doi.org/10.1515/9783110560855-012
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

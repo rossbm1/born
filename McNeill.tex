@@ -364,34 +364,13 @@ Also, we have
 	A similar computation reveals that $\left| K_{n + 1}^{(2)} \right|_{\infty}\le \mu^{n + 1}\nu_{n + 1}^{(2)}$.
 \end{proof}
 
-%I don't think I wanna do this. I think I wanna replicate the generating function proof of each \nu_{k}^(i) first and then combine the results at the end.
-\iffalse
-Using the previous lemma, we can bound the forward operators. First, we define 
-\begin{equation}\label{nu}
-	\nu_{n} \coloneqq \left[\left(\nu_{n}^{(1)}\right)^2 + \left(\nu_{n}^{(2)}\right)^2 \right]^{1/2}
-.\end{equation} 
-\begin{cor}
-	The forward operators $K_n$ are bounded multilinear operators from $\left[ L^{\infty}\left( \Omega \right) \right]^{n}$ to $C\left( \pp{\Omega}\times \pp{\Omega} \right)^2$ that satisfy
-	\[
-	\lVert K_{n} \rVert= \lVert \begin{pmatrix} \left| K_{n}^{(1)} \right|_{\infty}\\\left| K_{n}^{(2)} \right|_{_{\infty}} \end{pmatrix} \rVert \le \nu_{n}\mu^{n}  
-	.\] 
-\end{cor}
-\fi
-
 \begin{lem}
 	For the sequences $\{ \nu_{n}^{(1)} \}$ and $\{ \nu_{n}^{(2)} \}$ defined in \Cref{nuLem}, there exist constants $\nu^{(1)},\nu^{(2)}$ and $\kappa^{(1)}, \kappa^{(2)}$ such that
 	\begin{align}
 		\label{convg1}\nu_{n}^{(1)} &\le \nu^{(1)} \left( \kappa^{(1)} \right)^{n}\\
 		\label{convg2}\nu_{n}^{(2)} &\le \nu^{(2)} \left( \kappa^{(2)} \right)^{n}
 	.\end{align} 
-	\[
-	\nu^{(1)} = \nu^{(2)} = \lVert u_0 \rVert_{C\left( \overline{\Omega} \times \pp{\Omega} \right)^2}
-	\] 
-	and 
-	\[
-		%K^{(1)} = K^{(2)} = 4\lVert u_0 \rVert_{C\left( \overline{\Omega} \times \pp{\Omega} \right)^2}
-		\kappa^{(1)} = \kappa^{(2)} = 4\lVert u_0 \rVert_{C\left( \overline{\Omega} \times \pp{\Omega} \right)^2}
-	.\] 
+
 \end{lem}
 \begin{proof}
 	Let
